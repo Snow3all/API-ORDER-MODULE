@@ -96,16 +96,17 @@ export class AppService {
     }
   }
 
-  async getUserOrder(body: TokenData, res: Response) {
+  async getOrderInfo(body: any, res: Response) {
     try {
-      const { _id } = body.data;
-      const userOrder = await this.userModel
-        .findOne({ _id: _id })
-        .select('orederRef')
-        .populate('orderRef');
+      const { payload, data } = body.data;
+      console.log('data: ', data);
+      console.log('payload: ', payload);
+      const orderInfo = await this.orderModel
+        .findOne({ _id: data.orderId })
+        .populate('productId');
+      console.log('orderInfo: ', orderInfo);
       return res.status(200).json({
         statusCode: 0,
-        responseData: { data: userOrder },
         message: 'Success',
       });
     } catch (e) {

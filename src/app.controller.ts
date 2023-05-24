@@ -17,8 +17,8 @@ export class AppController {
     return this.appService.cancelOrder(body, res);
   }
 
-  @Post('/orders')
-  getUserOrder(@Body() body: TokenData, @Res() res: Response) {
-    return this.appService.getUserOrder(body, res);
+  @Post('/order')
+  getOrderInfo(@Body() body: TokenData, @Res() res: Response) {
+    return this.appService.getOrderInfo(body, res);
   }
 }

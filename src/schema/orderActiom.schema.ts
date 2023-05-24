@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
 import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Products } from './products.schema';
 
 export type OrderDocument = Order & Document;
 
@@ -15,7 +15,11 @@ export class Order {
   @Prop({ required: true })
   product: string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, required: true })
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    required: true,
+    ref: Products.name,
+  })
   productId: MongooseSchema.Types.ObjectId;
 
   @Prop({ required: true })
