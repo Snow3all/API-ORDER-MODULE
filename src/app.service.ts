@@ -99,14 +99,13 @@ export class AppService {
   async getOrderInfo(body: any, res: Response) {
     try {
       const { payload, data } = body.data;
-      console.log('data: ', data);
-      console.log('payload: ', payload);
       const orderInfo = await this.orderModel
         .findOne({ _id: data.orderId })
         .populate('productId');
       console.log('orderInfo: ', orderInfo);
       return res.status(200).json({
         statusCode: 0,
+        responseData: { data: orderInfo },
         message: 'Success',
       });
     } catch (e) {
